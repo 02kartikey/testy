@@ -1,0 +1,10 @@
+{
+  "name": "nunew",
+  "version": "1.0.0",
+  "description": "Assessment App",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "type": "commonjs"
+}

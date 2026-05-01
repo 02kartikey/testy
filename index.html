@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NuMind MAPS — Multi-dimensional Assessments for Personalized Success</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,600;0,700;0,800;1,700&family=Inter:wght@400;500;600&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<!-- Supabase SDK removed — DB layer uses plain fetch() instead -->
+<link rel="stylesheet" href="styles.css?v=20260429">
+</head>
+<body>
+
+<!-- ═══════════════════════════
+     NAV
+═══════════════════════════ -->
+<nav class="nav">
+  <div class="nav-logo" onclick="navLogoClick()">
+    <img src="https://numind.co.in/wp-content/uploads/2025/12/numind_logo.png" alt="NuMind" onerror="this.classList.add('errored')" />
+    <span class="nav-logo-text">NuMind</span>
+    <span class="nav-maps-tag">MAPS</span>
+  </div>
+  <div class="trail">
+    <div class="tp now" id="pip0">
+      <div class="tp-node">
+        <div class="tp-gem"><span class="tp-gem-icon">🚀</span></div>
+        <span class="tp-label">Start</span>
+      </div>
+    </div>
+    <div class="tp-connector" id="con0"></div>
+    <div class="tp" id="pip1">
+      <div class="tp-node">
+        <div class="tp-gem"><span class="tp-gem-icon">🌟</span></div>
+        <span class="tp-label">Personality</span>
+      </div>
+    </div>
+    <div class="tp-connector" id="con1"></div>
+    <div class="tp" id="pip2">
+      <div class="tp-node">
+        <div class="tp-gem"><span class="tp-gem-icon">🔬</span></div>
+        <span class="tp-label">Aptitude</span>
+      </div>
+    </div>
+    <div class="tp-connector" id="con2"></div>
+    <div class="tp" id="pip3">
+      <div class="tp-node">
+        <div class="tp-gem"><span class="tp-gem-icon">🧠</span></div>
+        <span class="tp-label">Interests</span>
+      </div>
+    </div>
+    <div class="tp-connector" id="con3"></div>
+    <div class="tp" id="pip4">
+      <div class="tp-node">
+        <div class="tp-gem"><span class="tp-gem-icon">💬</span></div>
+        <span class="tp-label">SEL</span>
+      </div>
+    </div>
+    <div class="tp-connector" id="con4"></div>
+    <div class="tp" id="pip5">
+      <div class="tp-node">
+        <div class="tp-gem"><span class="tp-gem-icon">✨</span></div>
+        <span class="tp-label">Insights</span>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- ═══════════════════════════
+     LANDING
+═══════════════════════════ -->
+<div id="page-landing" class="page active">
+
+  <!-- Hero Banner -->
+  <div class="landing-hero">
+    <div class="landing-hero-inner">
+      <div class="hero-eyebrow">
+        <span class="hero-eyebrow-dot"></span>
+        Multi-dimensional Assessments for Personalized Success
+      </div>
+      <h1>NuMind <em>MAPS</em></h1>
+      <p>A comprehensive psychometric assessment that maps your career interests, SEL readiness, personality and aptitude — giving you a personalised insight report.</p>
+      <div class="hero-badges">
+        <span class="hero-badge">⏱ ~65 minutes</span>
+        <span class="hero-badge">📊 4 Modules</span>
+        <span class="hero-badge">🎯 Personalised Report</span>
+        <span class="hero-badge">🔒 Confidential</span>
+      </div>
+      <div class="hero-ctas">
+        <button class="btn btn-lg" style="background:#fff;color:var(--brand3);font-family:'Poppins',sans-serif;font-weight:700;box-shadow:0 4px 20px rgba(0,0,0,.2)" onclick="goPage('register')">Begin Your Assessment 🚀</button>
+        <button class="btn btn-lg btn-outline" style="border-color:rgba(255,255,255,.4);color:#fff;font-family:'Poppins',sans-serif" onclick="document.getElementById('msec').scrollIntoView({behavior:'smooth'})">See What's Inside</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Stats Strip -->
+  <div class="stats-strip">
+    <div class="stats-strip-inner">
+      <div class="stat-item">
+        <div class="stat-num">4</div>
+        <div class="stat-lbl">Assessment Modules</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">190+</div>
+        <div class="stat-lbl">Psychometric Questions</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">9</div>
+        <div class="stat-lbl">Personality Dimensions</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">10</div>
+        <div class="stat-lbl">Career Domains Mapped</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap">
+
+    <!-- How It Works -->
+    <div class="journey-section">
+      <div class="section-eyebrow">How It Works</div>
+      <div class="section-title">Your Assessment Journey</div>
+      <div class="section-sub">Six simple steps from sign-up to your full personalised insights report.</div>
+
+      <div class="journey-row">
+        <div class="journey-step">
+          <div class="j-num">1</div>
+          <div class="j-icon" style="background:#e8faf5">📋</div>
+          <div class="j-title">Sign Up</div>
+          <div class="j-desc">Name, class & school. Done in 60 sec.</div>
+        </div>
+        <div class="journey-step">
+          <div class="j-num">2</div>
+          <div class="j-icon" style="background:#eef2ff">🧠</div>
+          <div class="j-title">Personality</div>
+          <div class="j-desc">63 statements · 9 dimensions.</div>
+        </div>
+        <div class="journey-step">
+          <div class="j-num">3</div>
+          <div class="j-icon" style="background:var(--branddl)">💬</div>
+          <div class="j-title">Aptitude</div>
+          <div class="j-desc">8 timed sub-tests · verbal & numerical</div>
+        </div>
+        <div class="journey-step">
+          <div class="j-num">4</div>
+          <div class="j-icon" style="background:#f5f3ff">🌟</div>
+          <div class="j-title">Interests</div>
+          <div class="j-desc">20 questions — 10 career areas.</div>
+        </div>
+        <div class="journey-step">
+          <div class="j-num">5</div>
+          <div class="j-icon" style="background:#ede9fe">🔬</div>
+          <div class="j-title">SEL Readiness</div>
+          <div class="j-desc">60 YES/NO school life statements.</div>
+        </div>
+        <div class="journey-step">
+          <div class="j-num">6</div>
+          <div class="j-icon" style="background:#fef3c7">✨</div>
+          <div class="j-title">Your Report</div>
+          <div class="j-desc">Full personalised career insight report.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Module Cards -->
+    <div class="modules-section" id="msec">
+      <div class="section-eyebrow">The Assessments</div>
+      <div class="section-title">Four Modules. One Complete Picture.</div>
+      <div class="section-sub">Each module is research-backed and designed specifically for students in Classes 9–12.</div>
+
+      <div class="mod-cards" style="margin-top:2rem">
+        <div class="mod-card m3">
+          <div class="mod-card-icon" style="background:#f5f3ff">🌟</div>
+          <div class="pill-badge" style="background:#f5f3ff;color:#7c3aed;margin-bottom:10px">Module 1 · NMAP</div>
+          <h3>Your Personality Profile</h3>
+          <p>Discover your personality across 9 dimensions — from leadership and creativity to resilience and ethical awareness.</p>
+          <div style="display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 4px">
+            <span style="background:#f5f3ff;color:#7c3aed;font-size:10px;font-weight:700;padding:3px 10px;border-radius:20px;letter-spacing:.04em">9 Dimensions</span>
+            <span style="background:#f5f3ff;color:#7c3aed;font-size:10px;font-weight:700;padding:3px 10px;border-radius:20px;letter-spacing:.04em">Leadership Traits</span>
+            <span style="background:#f5f3ff;color:#7c3aed;font-size:10px;font-weight:700;padding:3px 10px;border-radius:20px;letter-spacing:.04em">Stanine Scoring</span>
+          </div>
+          <div class="mod-stats">
+            <div class="mod-stat"><strong>63</strong>Statements</div>
+            <div class="mod-stat"><strong>9</strong>Dimensions</div>
+            <div class="mod-stat"><strong>~20 min</strong></div>
+          </div>
+        </div>
+
+        <div class="mod-card m4">
+          <div class="mod-card-icon" style="background:#ede9fe">🔬</div>
+          <div class="pill-badge" style="background:#ede9fe;color:#7c3aed;margin-bottom:10px">Module 2 · DAAB</div>
+          <h3>Aptitude Battery</h3>
+          <p>8 timed sub-tests covering Verbal Ability, Perceptual Ability, Numerical Ability, Legal Studies Aptitude, Spatial Ability, Mechanical Ability, Abstract Reasoning and Health & Medical ability. Auto-advances when time is up.</p>
+          <div style="display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 4px">
+            <span style="background:#ede9fe;color:#7c3aed;font-size:10px;font-weight:700;padding:3px 10px;border-radius:20px;letter-spacing:.04em">Verbal Ability</span>
+            <span style="background:#ede9fe;color:#7c3aed;font-size:10px;font-weight:700;padding:3px 10px;border-radius:20px;letter-spacing:.04em">Numerical Aptitude</span>
+            <span style="background:#ede9fe;color:#7c3aed;font-size:10px;font-weight:700;padding:3px 10px;border-radius:20px;letter-spacing:.04em">Timed Sub-tests</span>
+          </div>
+          <div class="mod-stats">
+            <div class="mod-stat"><strong>190</strong>Questions</div>
+            <div class="mod-stat"><strong>8</strong>Sub-tests</div>
+            <div class="mod-stat"><strong>~29 min</strong></div>
+          </div>
+        </div>
+
+        <div class="mod-card m1">
+          <div class="mod-card-icon" style="background:var(--m1l)">🧠</div>
+          <div class="pill-badge pb-m1" style="margin-bottom:10px">Module 3 · CPI</div>
+          <h3>Discover Your Interests</h3>
+          <p>Find out which of 10 career worlds — from Science & Technology to Arts, Law, Business and Sports — naturally excites you most.</p>
+          <div style="display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 4px">
+            <span style="background:var(--m1l);color:var(--m1);font-size:10px;font-weight:700;padding:3px 10px;border-radius:20px;letter-spacing:.04em">Career Mapping</span>
+            <span style="background:var(--m1l);color:var(--m1);font-size:10px;font-weight:700;padding:3px 10px;border-radius:20px;letter-spacing:.04em">10 Domains</span>
+            <span style="background:var(--m1l);color:var(--m1);font-size:10px;font-weight:700;padding:3px 10px;border-radius:20px;letter-spacing:.04em">Rank-Based Insights</span>
+          </div>
+          <div class="mod-stats">
+            <div class="mod-stat"><strong>20</strong>Questions</div>
+            <div class="mod-stat"><strong>10</strong>Career domains</div>
+            <div class="mod-stat"><strong>~8 min</strong></div>
+          </div>
+        </div>
+
+        <div class="mod-card m2">
+          <div class="mod-card-icon" style="background:var(--branddl)">💚</div>
+          <div class="pill-badge" style="background:var(--branddl);color:var(--brand2);margin-bottom:10px">Module 4 · NSEAAS</div>
+          <h3>SEL Readiness Check</h3>
+          <p>Measure Social &amp; Emotional Learning readiness across three dimensions — emotional regulation, social connection, and academic engagement.</p>
+          <div style="display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 4px">
+            <span style="background:var(--brandl);color:var(--brand2);font-size:10px;font-weight:700;padding:3px 10px;border-radius:20px;letter-spacing:.04em">Emotional Awareness</span>
+            <span style="background:var(--brandl);color:var(--brand2);font-size:10px;font-weight:700;padding:3px 10px;border-radius:20px;letter-spacing:.04em">Social Bonds</span>
+            <span style="background:var(--brandl);color:var(--brand2);font-size:10px;font-weight:700;padding:3px 10px;border-radius:20px;letter-spacing:.04em">School Engagement</span>
+          </div>
+          <div class="mod-stats">
+            <div class="mod-stat"><strong>60</strong>Statements</div>
+            <div class="mod-stat"><strong>6 rounds</strong>of 10</div>
+            <div class="mod-stat"><strong>~12 min</strong></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Approach Section -->
+  <div class="approach-section">
+    <div class="wrap">
+      <div class="section-eyebrow">Our Approach</div>
+      <div class="section-title">Backed by Psychology. Built for Students.</div>
+      <div class="section-sub">NuMind integrates AI-powered tools with psychology-backed frameworks to give you measurable, meaningful insights.</div>
+      <div class="approach-grid">
+        <div class="approach-card">
+          <div class="approach-icon">📊</div>
+          <div>
+            <div class="approach-title">Data-Backed Assessments</div>
+            <div class="approach-desc">Standardised psychometric instruments that provide measurable insights into your strengths and development areas.</div>
+          </div>
+        </div>
+        <div class="approach-card">
+          <div class="approach-icon">🎯</div>
+          <div>
+            <div class="approach-title">Personalised Insights</div>
+            <div class="approach-desc">Your results are unique to you — a full report that reads both modules together for deeper understanding.</div>
+          </div>
+        </div>
+        <div class="approach-card">
+          <div class="approach-icon">🔒</div>
+          <div>
+            <div class="approach-title">Safe & Confidential</div>
+            <div class="approach-desc">No right or wrong answers. Your responses stay in-session; only your registration details are saved securely.</div>
+          </div>
+        </div>
+        <div class="approach-card">
+          <div class="approach-icon">🧭</div>
+          <div>
+            <div class="approach-title">Career Guidance Ready</div>
+            <div class="approach-desc">Get concrete career path recommendations aligned to your interest profile and aptitude scores.</div>
+          </div>
+        </div>
+        <div class="approach-card">
+          <div class="approach-icon">⚡</div>
+          <div>
+            <div class="approach-title">Quick & Engaging</div>
+            <div class="approach-desc">Designed for students — the questions are clear, the interface is smooth, and it's done in under 45 minutes.</div>
+          </div>
+        </div>
+        <div class="approach-card">
+          <div class="approach-icon">📈</div>
+          <div>
+            <div class="approach-title">Holistic Profile</div>
+            <div class="approach-desc">Four separate modules combine into a single 360° view of who you are and where you can thrive.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="cta-strip" style="margin-top:3rem">
+      <h3>Ready to Discover Your Future? 🌟</h3>
+      <p>No right or wrong answers — just be honest and have fun with it! Takes about 45 minutes.</p>
+      <button class="btn-cta" onclick="goPage('register')">Begin Your Assessment 🚀</button>
+    </div>
+
+    <!-- Powered by NuMind footer note -->
+    <div style="text-align:center;padding:1.5rem 0 2.5rem;display:flex;align-items:center;justify-content:center;gap:10px">
+      <span style="font-size:12px;color:var(--ink4)">Powered by</span>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 140 36" height="20" style="opacity:.7" aria-label="NuMind"><rect x="0" y="4" width="28" height="28" rx="7" fill="#0e4f5c"/><text x="5.5" y="23" font-family="Arial Black,sans-serif" font-size="17" font-weight="900" fill="#fff">N</text><circle cx="22" cy="10" r="3.5" fill="#64e4f0" opacity=".9"/><text x="33" y="24" font-family="Poppins,Arial,sans-serif" font-size="15" font-weight="800" fill="#0e4f5c">Nu</text><text x="54" y="24" font-family="Poppins,Arial,sans-serif" font-size="15" font-weight="800" fill="#1a7f8e">Mind</text></svg
+           onerror="this.outerHTML='<span style=\'font-size:12px;font-weight:700;color:var(--brand)\'>NuMind</span>'">
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════
+     REGISTER
+═══════════════════════════ -->
+<div id="page-register" class="page">
+  <div class="wrapsm">
+    <div class="reg-hero">
+      <span class="emoji">👋</span>
+      <h2>First, tell us about yourself!</h2>
+      <p>Just a few quick details to personalise your results report.</p>
+    </div>
+    <div class="card cp">
+      <div class="frow">
+        <div class="field"><label>First Name *</label><input id="r-fn" placeholder="e.g. Priya"><div class="ferr" id="e-fn">Please enter your first name</div></div>
+        <div class="field"><label>Last Name *</label><input id="r-ln" placeholder="e.g. Sharma"><div class="ferr" id="e-ln">Please enter your last name</div></div>
+      </div>
+      <div class="frow">
+        <div class="field">
+          <label>Class *</label>
+          <select id="r-cls">
+            <option value="">Select your class</option>
+            <option>Class 9</option><option>Class 10</option>
+            <option>Class 11</option><option>Class 12</option>
+          </select>
+          <div class="ferr" id="e-cls">Please select your class</div>
+        </div>
+        <div class="field"><label>Section</label><input id="r-sec" placeholder="e.g. A"></div>
+      </div>
+      <div class="field"><label>School Name *</label><input id="r-sch" placeholder="e.g. Delhi Public School"><div class="ferr" id="e-sch">Please enter your school name</div></div>
+      <div class="frow">
+        <div class="field">
+          <label>State *</label>
+          <select id="r-state" onchange="populateCities()">
+            <option value="">Select State</option>
+          </select>
+          <div class="ferr" id="e-state">Please select your state</div>
+        </div>
+        <div class="field">
+          <label>City *</label>
+          <select id="r-city" disabled>
+            <option value="">Select State first</option>
+          </select>
+          <div class="ferr" id="e-city">Please select your city</div>
+        </div>
+      </div>
+      <div class="frow">
+        <div class="field"><label>Age</label><input id="r-age" type="number" placeholder="15" min="12" max="20"></div>
+        <div class="field">
+          <label>Gender *</label>
+          <select id="r-gen">
+            <option value="">Select</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Prefer not to say</option>
+          </select>
+          <div class="ferr" id="e-gen">Required — used for scoring</div>
+        </div>
+      </div>
+      <div class="field"><label>Guardian Email (optional)</label><input id="r-email" type="email" placeholder="parent@example.com"></div>
+
+      <div class="consent-box" onclick="if(event.target.id!=='r-con'){var cb=document.getElementById('r-con');cb.checked=!cb.checked;}">
+        <input type="checkbox" id="r-con" onclick="event.stopPropagation()">
+        <span>I'll answer honestly — I understand this is a guidance tool, not an exam. My registration details will be saved securely; my question responses stay in-session only.</span>
+      </div>
+      <div class="ferr" id="e-con" style="margin-bottom:12px">Please tick to continue.</div>
+
+      <div class="db-status" id="db-status" style="display:none">
+        <div class="db-dot" id="db-dot"></div>
+        <span id="db-msg">Saving…</span>
+      </div>
+
+      <button class="btn btn-primary btn-full" style="margin-top:8px" onclick="doRegister()">
+        Continue to Module 1 — Personality →
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════
+     CPI QUIZ
+═══════════════════════════ -->
+<div id="page-cpi" class="page">
+  <div class="quiz-shell">
+    <aside class="sidebar">
+      <div class="timer-box">
+        <div class="timer-lbl">Time elapsed</div>
+        <div class="timer-val" id="cpi-timer">00:00</div>
+      </div>
+      <div class="sidebar-sec">
+        <div class="prog-bar-wrap">
+          <div class="prog-bar-meta">
+            <span class="eyebrow">Progress</span>
+            <span class="prog-bar-pct" id="cpi-ptxt">0%</span>
+          </div>
+          <div class="prog-track"><div class="prog-fill" id="cpi-pbar" style="width:0%"></div></div>
+        </div>
+      </div>
+      <div class="sidebar-sec">
+        <span class="eyebrow">Questions</span>
+        <div class="qmap" id="cpi-qmap"></div>
+      </div>
+      <div style="font-size:12px;color:var(--ink3);line-height:1.65;margin-top:4px">
+        Pick <strong style="color:var(--ink2)">up to 3 answers</strong> that feel most like you per question. Go with your gut! 😊
+      </div>
+    </aside>
+
+    <div class="qarea" id="cpi-qarea">
+      <!-- rendered by JS -->
+    </div>
+
+    <!-- Mobile bottom nav (hidden on desktop) -->
+    <div class="mobile-nav" id="cpi-mobile-nav"></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════
+     CPI → NSEAAS TRANSITION
+═══════════════════════════ -->
+<div id="page-transition" class="page">
+  <div class="t-screen">
+    <div class="t-emoji">🎉</div>
+    <h2>You've completed this section!</h2>
+    <p>Amazing work! You've finished the personality assessment. Now let's measure your abilities across key aptitude areas.</p>
+    <div class="t-info-box">
+      <div class="eyebrow">Next up — Module 2 · DAAB</div>
+      <p>8 timed sub-tests covering <strong>Verbal, Perceptual, Numerical, Legal, Abstract, Mechanical, Spatial &amp; Health</strong> abilities. Each sub-test advances automatically when time is up.</p>
+    </div>
+    <button class="btn btn-lg" style="background:var(--m4);color:#fff;box-shadow:0 4px 14px rgba(124,58,237,.3)" onclick="startDAAB()">Begin Aptitude Battery →</button>
+    <div class="affirm">You're doing amazing! Keep going 👇</div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════
+     NSEAAS PAGINATED
+═══════════════════════════ -->
+<div id="page-nseaas" class="page">
+  <div class="sea-shell">
+    <aside class="sea-sidebar">
+      <div class="timer-box">
+        <div class="timer-lbl">Time elapsed</div>
+        <div class="timer-val" id="sea-timer">00:00</div>
+      </div>
+      <div class="sidebar-sec">
+        <div class="prog-bar-wrap">
+          <div class="prog-bar-meta">
+            <span class="eyebrow">Overall progress</span>
+            <span class="prog-bar-pct" id="sea-ptxt">0%</span>
+          </div>
+          <div class="prog-track">
+            <div class="prog-fill" id="sea-pbar" style="width:0%;background:var(--m2)"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sidebar-sec">
+        <span class="eyebrow">Rounds</span>
+        <div class="page-nav" id="sea-pagenav"></div>
+      </div>
+      <div style="font-size:12px;color:var(--ink3);line-height:1.65;margin-top:4px">
+        Just answer YES or NO — there are no right or wrong answers! ✌️
+      </div>
+    </aside>
+
+    <div style="display:flex;flex-direction:column;min-height:calc(100vh - 56px)">
+      <div class="sea-main" style="flex:1" id="sea-main"></div>
+      <div class="sea-pnav" id="sea-pnav"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════
+     NSEAAS → NMAP TRANSITION
+═══════════════════════════ -->
+<div id="page-transition2" class="page">
+  <div class="t-screen">
+    <div class="t-emoji">🌟</div>
+    <h2>Two more sections to go!</h2>
+    <p>Great work — you've done two modules! Now let's discover your interests and find out which career areas light you up.</p>
+    <div class="t-info-box">
+      <div class="eyebrow">Next up — Module 3 · CPI</div>
+      <p>20 questions covering 10 interest areas. Pick the options that feel most like <em>you</em> — there are no right or wrong answers!</p>
+    </div>
+    <button class="btn btn-m1 btn-lg" onclick="startCPI()">Begin Interest Discovery →</button>
+    <div class="affirm">Almost at your personalised insight report! 🎯</div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════
+     NMAP QUIZ (Module 3)
+═══════════════════════════ -->
+<div id="page-nmap" class="page">
+  <div class="nmap-shell">
+    <aside class="nmap-sidebar">
+      <div class="timer-box">
+        <div class="timer-lbl">Time elapsed</div>
+        <div class="timer-val" id="nmap-timer">00:00</div>
+      </div>
+      <div class="sidebar-sec">
+        <div class="prog-bar-wrap">
+          <div class="prog-bar-meta">
+            <span class="eyebrow">Overall progress</span>
+            <span class="prog-bar-pct" id="nmap-ptxt">0%</span>
+          </div>
+          <div class="prog-track">
+            <div class="prog-fill" id="nmap-pbar" style="width:0%;background:var(--m3)"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sidebar-sec">
+        <span class="eyebrow">Dimensions</span>
+        <div class="nmap-dim-nav" id="nmap-dimnav"></div>
+      </div>
+      <div style="font-size:12px;color:var(--ink3);line-height:1.65;margin-top:4px">
+        Answer <strong>Always</strong>, <strong>Sometimes</strong>, or <strong>Never</strong> — go with your first feeling! 🌟
+      </div>
+    </aside>
+
+    <div style="display:flex;flex-direction:column;min-height:calc(100vh - 56px)">
+      <div class="nmap-qarea" style="flex:1" id="nmap-qarea"></div>
+      <div class="nmap-pnav" id="nmap-pnav"></div>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- ═══════════════════════════
+     NMAP → DAAB TRANSITION
+═══════════════════════════ -->
+<div id="page-transition3" class="page">
+  <div class="t-screen">
+    <div class="t-emoji">🎯</div>
+    <h2>Almost there!</h2>
+    <p>You've completed 3 modules! Now let's check in on how you're doing at school — the final piece of your full picture.</p>
+    <div class="t-info-box">
+      <div class="eyebrow">Next up — Module 4 · NSEAAS</div>
+      <p>60 short YES / NO statements about your school life, shown 10 at a time. Honest answers give the best results!</p>
+    </div>
+    <button class="btn btn-m2 btn-lg" onclick="startNSEAAS()">Begin SEL Assessment →</button>
+    <div class="affirm">Final stretch — your full report awaits! 🌟</div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════
+     DAAB QUIZ (Module 4)
+═══════════════════════════ -->
+<div id="page-daab" class="page">
+  <!-- Mobile progress strip (hidden on desktop) -->
+  <div id="daab-mobile-subnav" style="display:flex;align-items:flex-start;justify-content:space-between;padding:10px 16px 8px;background:var(--surface);border-bottom:1px solid var(--border);gap:4px;"></div>
+  <div class="daab-shell">
+    <aside class="daab-sidebar">
+      <div class="timer-box">
+        <div class="timer-lbl">Time remaining</div>
+        <div class="timer-val daab-timer-val" id="daab-timer-display">—:——</div>
+      </div>
+      <div class="sidebar-sec">
+        <div class="prog-bar-wrap">
+          <div class="prog-bar-meta">
+            <span class="eyebrow">Progress</span>
+            <span class="prog-bar-pct" id="daab-overall-pct">0%</span>
+          </div>
+          <div class="prog-track">
+            <div class="prog-fill" id="daab-overall-bar" style="width:0%;background:var(--m4)"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sidebar-sec">
+        <span class="daab-sidebar-title">Sub-tests</span>
+        <div class="daab-sub-nav" id="daab-subnav"></div>
+      </div>
+      <div class="daab-sidebar-hint">
+        Each sub-test is <strong>timed</strong> — it advances automatically when time runs out. Do your best! ⚡
+      </div>
+    </aside>
+    <div class="daab-main">
+      <div id="daab-subtest-area"></div>
+    </div>
+  </div>
+</div>
+
+<div id="page-ready" class="page">
+  <div class="ready-screen">
+    <div class="r-emoji">✨</div>
+    <h2>Your Results Are Ready!</h2>
+    <p>You've completed all four modules. We've put together your personalised insight report — let's see what you're made of!</p>
+    <div class="ready-actions">
+      <button class="btn btn-primary btn-lg" onclick="buildResults(); goPage('results')">View My Insights 🎯</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════
+     RESULTS
+═══════════════════════════ -->
+<div id="page-results" class="page" style="--page-accent:var(--lavender)">
+  <div class="res-hero">
+    <div class="res-hero-in">
+      <div>
+        <div class="res-hero-eyebrow">✨ Your personalised insight report</div>
+        <h2>Here's what we discovered about you</h2>
+        <p id="res-date">—</p>
+      </div>
+      <div class="res-student-card">
+        <div class="res-student-name" id="res-name">—</div>
+        <div class="res-student-meta" id="res-meta">—</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Hidden scoring containers — needed by buildResults() logic but not shown -->
+  <div style="display:none">
+    <div id="r-cpi-bars"></div>
+    <div id="r-sea-domains"></div>
+    <div id="r-sea-bars"></div>
+    <div id="r-careers"></div>
+    <div id="r-nmap-grid"></div>
+    <div id="r-nmap-narrative"></div>
+    <div id="r-daab-grid"></div>
+    <div id="r-interp"></div>
+  </div>
+
+  <div class="wraplg">
+    <div class="res-grid">
+
+      <!-- ═══════════ INTERACTIVE CHARTS DASHBOARD ═══════════ -->
+      <div class="card cp span2" id="charts-dashboard-card">
+        <div class="res-card-header" style="margin-bottom:1.25rem">
+          <div class="res-mod-icon" style="background:linear-gradient(135deg,#0e4f5c,#1a7f8e);color:#fff;font-size:18px">📊</div>
+          <div>
+            <div class="res-mod-title">Interactive Score Visualisations</div>
+            <div class="res-mod-sub">Charts auto-generated from your assessment data — tap tabs to explore</div>
+          </div>
+        </div>
+
+        <!-- Zone Key Banner -->
+        <div style="background:linear-gradient(90deg,#fef2f2,#fefce8,#f0fdf4);border:1px solid #e5e7eb;border-radius:10px;padding:9px 14px;margin-bottom:10px;display:flex;align-items:center;gap:18px;font-size:12px;flex-wrap:wrap">
+          <span style="font-weight:700;color:#374151;font-size:12px">📊 Score Guide (all stanine charts):</span>
+          <span style="display:inline-flex;align-items:center;gap:5px"><span style="width:12px;height:12px;border-radius:3px;background:#ef4444;display:inline-block"></span><strong style="color:#dc2626">1–3</strong>&nbsp;Needs Attention</span>
+          <span style="display:inline-flex;align-items:center;gap:5px"><span style="width:12px;height:12px;border-radius:3px;background:#f59e0b;display:inline-block"></span><strong style="color:#d97706">4–6</strong>&nbsp;Developing</span>
+          <span style="display:inline-flex;align-items:center;gap:5px"><span style="width:12px;height:12px;border-radius:3px;background:#10b981;display:inline-block"></span><strong style="color:#059669">7–9</strong>&nbsp;Strength</span>
+          <span style="color:#9ca3af">·</span>
+          <span style="color:#6b7280">SEL: <strong>lower bar = better</strong> &nbsp;|&nbsp; Interest: <strong>higher = stronger</strong></span>
+        </div>
+        <!-- Tabs -->
+        <div class="charts-tabs">
+          <button class="chart-tab active" onclick="switchChartTab('cpi')">🧠 Career Interests</button>
+          <button class="chart-tab" onclick="switchChartTab('sel')">💚 SEL Readiness</button>
+          <button class="chart-tab" onclick="switchChartTab('nmap')">🌟 Personality</button>
+          <button class="chart-tab" onclick="switchChartTab('daab')">🔬 Aptitude</button>
+          <button class="chart-tab" onclick="switchChartTab('overview')">✦ Full Overview</button>
+        </div>
+
+        <!-- ── CPI Tab ── -->
+        <div class="chart-panel active" id="chart-panel-cpi">
+          <div class="chart-grid-2">
+            <div class="chart-box">
+              <div class="chart-box-title">Career Interest Ranking</div>
+              <div class="chart-box-sub">Horizontal bar — score out of 20 · Color reflects strength of interest area</div>
+              <div class="chart-canvas-wrap" style="height:340px">
+                <canvas id="chart-cpi-hbar"></canvas>
+              </div>
+            </div>
+            <div class="chart-box">
+              <div class="chart-box-title">Interest Distribution</div>
+              <div class="chart-box-sub">Donut — share of total selections per career area</div>
+              <div class="chart-canvas-wrap" style="height:300px">
+                <canvas id="chart-cpi-donut"></canvas>
+              </div>
+              <div class="chart-legend" id="chart-cpi-legend"></div>
+            </div>
+          </div>
+          <div class="chart-summary-row" id="chart-cpi-stats"></div>
+        </div>
+
+        <!-- ── SEL Tab ── -->
+        <div class="chart-panel" id="chart-panel-sel">
+          <div class="chart-grid-2">
+            <div class="chart-box">
+              <div class="chart-box-title">SEL Domain Scores</div>
+              <div class="chart-box-sub">⚠ Higher bar = MORE concern · 🟢 0-8 Good &nbsp;🟡 8-14 Moderate &nbsp;🔴 14-20 Needs Attention</div>
+              <div class="chart-canvas-wrap" style="height:260px">
+                <canvas id="chart-sel-bar"></canvas>
+              </div>
+            </div>
+            <div class="chart-box">
+              <div class="chart-box-title">SEL Readiness Gauges</div>
+              <div class="chart-box-sub">Bar colour = category · 🟢 Cat A-B Good &nbsp; 🟡 Cat C Moderate &nbsp; 🔴 Cat D-E Needs Support</div>
+              <div class="sel-gauge-row" id="chart-sel-gauges" style="margin-top:.5rem"></div>
+            </div>
+          </div>
+          <div class="chart-box" style="margin-top:1.25rem">
+            <div class="chart-box-title">SEL Profile Radar</div>
+            <div class="chart-box-sub">Inverted scores — higher on chart = better adjustment</div>
+            <div class="chart-canvas-wrap" style="height:260px;max-width:380px;margin:0 auto">
+              <canvas id="chart-sel-radar"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── NMAP Tab ── -->
+        <div class="chart-panel" id="chart-panel-nmap">
+          <div class="chart-grid-2">
+            <div class="chart-box">
+              <div class="chart-box-title">Personality Radar</div>
+              <div class="chart-box-sub">9 dimensions — stanine 1–9 · outer = stronger</div>
+              <div class="chart-canvas-wrap" style="height:320px;max-width:400px;margin:0 auto">
+                <canvas id="chart-nmap-radar"></canvas>
+              </div>
+            </div>
+            <div class="chart-box">
+              <div class="chart-box-title">Dimension Stanine Scores</div>
+              <div class="chart-box-sub">Vertical bar — colour = strength band</div>
+              <div class="chart-canvas-wrap" style="height:300px">
+                <canvas id="chart-nmap-bar"></canvas>
+              </div>
+            </div>
+          </div>
+          <div class="chart-box" style="margin-top:1.25rem">
+            <div class="chart-box-title">Personality Strength Bands</div>
+            <div class="chart-box-sub">Bubble size = stanine score · position shows raw score %</div>
+            <div class="chart-canvas-wrap" style="height:200px">
+              <canvas id="chart-nmap-bubble"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── DAAB Tab ── -->
+        <div class="chart-panel" id="chart-panel-daab">
+          <div class="chart-grid-2">
+            <div class="chart-box">
+              <div class="chart-box-title">Aptitude Stanine Scores</div>
+              <div class="chart-box-sub">Stanine 1–9 scale · dashed line = average band (5)</div>
+              <div class="chart-canvas-wrap" style="height:300px">
+                <canvas id="chart-daab-bar"></canvas>
+              </div>
+            </div>
+            <div class="chart-box">
+              <div class="chart-box-title">Aptitude Radar</div>
+              <div class="chart-box-sub">Multi-dimensional view of your aptitude profile</div>
+              <div class="chart-canvas-wrap" style="height:300px;max-width:380px;margin:0 auto">
+                <canvas id="chart-daab-radar"></canvas>
+              </div>
+            </div>
+          </div>
+          <div class="chart-box" style="margin-top:1.25rem">
+            <div class="chart-box-title">Raw Score vs Maximum</div>
+            <div class="chart-box-sub">Stacked bar — achieved score vs remaining (per sub-test)</div>
+            <div class="chart-canvas-wrap" style="height:220px">
+              <canvas id="chart-daab-stacked"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── Overview Tab ── -->
+        <div class="chart-panel" id="chart-panel-overview">
+          <div class="chart-grid-2">
+            <div class="chart-box">
+              <div class="chart-box-title">All-Module Stanine Overview</div>
+              <div class="chart-box-sub">Normalised stanine (1–9) across all scored dimensions</div>
+              <div class="chart-canvas-wrap" style="height:340px">
+                <canvas id="chart-overview-bar"></canvas>
+              </div>
+            </div>
+            <div class="chart-box">
+              <div class="chart-box-title">Holistic Profile Radar</div>
+              <div class="chart-box-sub">NMAP personality + DAAB aptitude combined view</div>
+              <div class="chart-canvas-wrap" style="height:320px;max-width:400px;margin:0 auto">
+                <canvas id="chart-overview-radar"></canvas>
+              </div>
+            </div>
+          </div>
+          <div class="chart-summary-row" id="chart-overview-stats"></div>
+        </div>
+
+      </div><!-- end charts-dashboard-card -->
+
+      <!-- AI-Generated Final Report -->
+      <div class="card cp span2" id="ai-report-card">
+        <div class="res-card-header">
+          <div class="res-mod-icon rmi-dk" style="background:linear-gradient(135deg,#4f46e5,#7c3aed);color:#fff;font-size:18px">✦</div>
+          <div style="flex:1">
+            <div class="res-mod-title">Your AI-Generated Insight Report</div>
+            <div class="res-mod-sub">Powered by AI · synthesising all 4 modules together</div>
+          </div>
+          <button id="ai-report-btn" onclick="generateAIReport()"
+            style="display:inline-flex;align-items:center;gap:8px;padding:10px 22px;border-radius:12px;
+            background:linear-gradient(135deg,#4f46e5,#7c3aed);color:#fff;border:none;cursor:pointer;
+            font-family:'Poppins',sans-serif;font-size:14px;font-weight:600;white-space:nowrap;
+            box-shadow:0 4px 14px rgba(79,70,229,.3);transition:all .2s">
+            ✦ Generate Report
+          </button>
+          <button id="ai-cancel-btn" onclick="cancelReport()"
+            style="display:none;align-items:center;gap:8px;padding:10px 18px;border-radius:12px;
+            background:#fff;color:#6b7280;border:1.5px solid #e5e7eb;cursor:pointer;
+            font-family:'Poppins',sans-serif;font-size:14px;font-weight:600;white-space:nowrap;
+            transition:all .2s">
+            ✕ Cancel
+          </button>
+        </div>
+
+        <!-- Idle state -->
+        <div id="ai-report-idle" style="text-align:center;padding:2.5rem 1rem">
+          <div style="font-size:52px;margin-bottom:1rem">🤖</div>
+          <div style="font-family:'Nunito',sans-serif;font-size:18px;font-weight:800;color:var(--ink);margin-bottom:.5rem">Ready to generate your personalised report</div>
+          <div style="color:var(--ink3);font-size:14px;max-width:480px;margin:0 auto;line-height:1.7">
+            Click <strong>Generate Report</strong> above and our AI will analyse all four modules — your career interests, SEL readiness, personality and aptitude — and write a detailed, personalised report just for you.
+          </div>
+        </div>
+
+        <!-- Loading state -->
+        <div id="ai-report-loading" style="display:none;text-align:center;padding:3rem 1rem">
+          <div style="display:inline-block;width:48px;height:48px;border:4px solid var(--brandl);border-top-color:var(--brand);border-radius:50%;animation:ai-spin 0.9s linear infinite;margin-bottom:1.25rem"></div>
+          <div style="font-family:'Nunito',sans-serif;font-size:18px;font-weight:800;color:var(--ink);margin-bottom:.5rem">Analysing your results…</div>
+          <div style="color:var(--ink3);font-size:14px" id="ai-loading-msg">Reading all four modules and crafting your personalised report…</div>
+        </div>
+
+        <!-- Error state -->
+        <div id="ai-report-error" style="display:none;background:var(--soft-redl);border:1.5px solid rgba(220,38,38,.2);border-radius:14px;padding:1.5rem;text-align:center">
+          <div style="font-size:32px;margin-bottom:.75rem">⚠️</div>
+          <div style="font-weight:700;color:var(--soft-red);margin-bottom:.5rem">Could not generate report</div>
+          <div id="ai-error-msg" style="color:var(--ink3);font-size:13px;margin-bottom:1rem"></div>
+          <button onclick="generateAIReport()" style="padding:10px 24px;border-radius:10px;background:var(--brand);color:#fff;border:none;cursor:pointer;font-weight:600;font-size:14px">Try Again</button>
+        </div>
+
+        <!-- Report output -->
+        <div id="ai-report-output" style="display:none"></div>
+      </div>
+
+    </div><!-- end res-grid -->
+
+    <!-- PDF Download Action -->
+    <div class="res-actions" style="justify-content:center;padding:2rem 0 3rem">
+      <button class="btn-pdf" id="pdf-download-btn" onclick="downloadPDF()">
+        <span class="pdf-icon">⬇</span>
+        <span class="pdf-spinner"></span>
+        Download Full Report as PDF
+      </button>
+    </div>
+
+  </div>
+</div>
+
+
+<script type="module" src="./js/main.js"></script>
+</body>
+</html>
